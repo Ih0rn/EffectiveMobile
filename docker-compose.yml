@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend 
+    image: backend:latest
+    container_name: backend
+    expose:
+    - "8080"
+    networks:
+    - test-net 
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+    - "80:80"
+    networks:
+      - test-net
+    depends_on:
+      - backend
+networks:
+  test-net: 
+    driver: bridge

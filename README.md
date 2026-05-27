@@ -14,26 +14,30 @@
 - Node.js (образ `node:22-alpine`)
 - Nginx (образ `nginx:alpine`, собранный с кастомным конфигуратором)
 
-## Как запустить проект
+# Как запустить проект
 
 Клонируйте репозиторий:
-
-1. Клонируйте репозиторий:
    ```bash
-   git clone <ссылка на ваш репозиторий>
-   cd <папка проекта>
+git clone https://github.com/Ih0rn/EffectiveMobile.git
+```
+   Перейдите в папку с проетом
+   и введите команду в терминале
+```bash
+docker-compose up --build
+```
 
-# Как проверить результат
+   Для проверки результата необходимо выполнить команду 
+```bash
+curl http://localhost
+```
 
-Для проверки результата необходимо выполнить команду "curl http://localhost"
-
-# Краткая схема работы (nginx → backend)
-
+# Краткая схема работы (nginx → backend):
+![Схема взаимосвязей сервисов](ServiceInteractionScheme.png)
 Nginx слушает порт 80 и пробрасывает его на хост.
 
 При входящем запросе GET / nginx проксирует его на backend по адресу http://backend:8080.
 
-Backend слушает порт 8080 только внутри Docker-сети и отвечает текстом "Hello from Effective Mobile!".
+Backend слушает порт 8080 только внутри Docker-сети и отвечает текстом `"Hello from Effective Mobile!"`.
 
 Nginx возвращает этот ответ клиенту.
 
